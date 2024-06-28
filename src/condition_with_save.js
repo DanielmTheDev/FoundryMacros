@@ -11,7 +11,7 @@ new Dialog({
     <form>
       <div class="form-group">
         <label for="dc">DC:</label>
-        <input type="number" id="dc" name="dc" value="15"/>
+        <input type="number" id="dc" name="dc" value="15"/>|
       </div>
       <div class="form-group">
         <label for="ability">Ability Score:</label>
@@ -52,25 +52,28 @@ new Dialog({
                     if (dc && ability) {
                         let saveRoll = await actor.rollAbilitySave(ability, { chatMessage: true });
                         let saveSuccess = saveRoll.fields[1][1].formula.total >= dc;
-                        if (!saveSuccess) {
-                            await actor.createEmbeddedDocuments("ActiveEffect", [{
-                                label: condition.label,
-                                icon: condition.icon,
-                                origin: actor.uuid,
-                                disabled: false,
-                                changes: []
-                            }]);
-                            ui.notifications.info(`${actor.name} failed the saving throw and is now ${condition.label}`);
-                        } else {
+                        if(saveSuccess){
                             ui.notifications.info(`${actor.name} succeeded on the saving throw and is not affected.`);
+                            return
                         }
+                        await actor.createEmbeddedDocuments("ActiveEffect", [{
+                            label: condition.label,
+                            icon: condition.icon,
+                            origin: actor.uuid,
+                            disabled: false,
+                            changes: [],
+                            duration: { rounds: 10, startRound: game.combat ? game.combat.round : 0 }
+                        }]);
+                        ui.notifications.info(`${actor.name} failed the saving throw and is now ${condition.label}`);
+
                     } else {
                         await actor.createEmbeddedDocuments("ActiveEffect", [{
                             label: condition.label,
                             icon: condition.icon,
                             origin: actor.uuid,
                             disabled: false,
-                            changes: []
+                            changes: [],
+                            duration: { rounds: 10, startRound: game.combat ? game.combat.round : 0 }
                         }]);
                         ui.notifications.info(`${actor.name} is now ${condition.label}`);
                     }
