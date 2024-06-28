@@ -4,13 +4,13 @@
     <form>
       <div class="form-group">
         <label for="dc">DC:</label>
-        <input type="number" id="dc" name="dc"/>
+        <input type="number" id="dc" name="dc" value="15"/>
       </div>
       <div class="form-group">
         <label for="ability">Ability Score:</label>
         <select id="ability" name="ability">
           <option value="str">Strength</option>
-          <option value="dex">Dexterity</option>
+          <option value="dex" selected>Dexterity</option>
           <option value="con">Constitution</option>
           <option value="int">Intelligence</option>
           <option value="wis">Wisdom</option>
@@ -19,11 +19,11 @@
       </div>
       <div class="form-group">
         <label for="halfOnSave">Half on Save:</label>
-        <input type="checkbox" id="halfOnSave" name="halfOnSave"/>
+        <input type="checkbox" id="halfOnSave" name="halfOnSave" checked/>
       </div>
       <div class="form-group">
         <label for="damageRoll">Damage Roll:</label>
-        <input type="text" id="damageRoll" name="damageRoll"/>
+        <input type="text" id="damageRoll" name="damageRoll" value="2d6"/>
       </div>
     </form>
   `,
