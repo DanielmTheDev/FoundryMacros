@@ -53,7 +53,7 @@
                         let saveRoll = await actor.rollAbilitySave(ability, {chatMessage: true});
                         let saveSuccess = saveRoll.total >= dc;
                         let damage = new Roll(damageRoll).roll({async: false});
-                        await damage.toMessage({
+                        damage.toMessage({
                             speaker: ChatMessage.getSpeaker({ actor: actor }),
                             flavor: `Damage Roll (${saveSuccess ? "Saved" : "Failed"})`
                         });
@@ -64,7 +64,7 @@
                         await actor.applyDamage(finalDamage);
                     } else {
                         let damage = new Roll(damageRoll).roll({async: false});
-                        await damage.toMessage({
+                        damage.toMessage({
                             speaker: ChatMessage.getSpeaker({ actor: actor }),
                             flavor: "Damage Roll"
                         });
