@@ -51,8 +51,7 @@ new Dialog({
                     let actor = target.actor;
                     if (dc && ability) {
                         let saveRoll = await actor.rollAbilitySave(ability, { chatMessage: true });
-                        let saveSuccess = saveRoll.total >= dc;
-
+                        let saveSuccess = saveRoll.fields[1][1].formula.total >= dc;
                         if (!saveSuccess) {
                             await actor.createEmbeddedDocuments("ActiveEffect", [{
                                 label: condition.label,

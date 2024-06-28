@@ -50,8 +50,10 @@
                 for (let target of targets) {
                     let actor = target.actor;
                     if (dc) {
-                        let saveRoll = await actor.rollAbilitySave(ability, {chatMessage: true});
-                        let saveSuccess = saveRoll.total >= dc;
+                        let saveRoll = await actor.rollAbilitySave(ability);
+                        let saveSuccess = saveRoll.fields[1][1].formula.total >= dc;
+                        if (saveSuccess)
+                            return
                         let damage = new Roll(damageRoll).roll({async: false});
                         await damage.toMessage({
                             speaker: ChatMessage.getSpeaker({ actor: actor }),
