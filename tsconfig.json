@@ -7,10 +7,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "types": ["@league-of-foundry-developers/foundry-vtt-types", "./types"],
+    "types": ["@league-of-foundry-developers/foundry-vtt-types"],
   },
   "include": [
     "src/**/*.ts",
+    "src/**/*.js",
     "node_modules/@league-of-foundry-developers/foundry-vtt-types/types/**/*.ts",
     "types/**/*.d.ts"
   ]
