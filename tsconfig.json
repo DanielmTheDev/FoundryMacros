@@ -1,0 +1,16 @@
+﻿{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "types": ["@league-of-foundry-developers/foundry-vtt-types"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "node_modules/@league-of-foundry-developers/foundry-vtt-types/types/**/*.ts"
+  ]
+}
