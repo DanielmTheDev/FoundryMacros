@@ -38,11 +38,8 @@ let target = Array.from(game.user.targets)[0];
 let targetActor = target.actor;
 
 // Roll Athletics for the attacker
-await attackerActor.rollSkill("ath");
-
-// Get the last chat message for the attacker's roll
-let attackerMessage = game.messages.contents[game.messages.contents.length - 1];
-let attackerRoll = attackerMessage.data.flags.betterrolls5e.entries[1].entries[0].total;
+let attackerRoll = await attackerActor.rollSkill("ath");
+attackerRollTotal = attackerRoll.fields[1][1].formula.total
 
 // Determine the higher of target's Athletics or Acrobatics
 let targetAthletics = targetActor.data.data.skills.ath.total;
@@ -50,14 +47,12 @@ let targetAcrobatics = targetActor.data.data.skills.acr.total;
 let targetSkill = targetAthletics >= targetAcrobatics ? "ath" : "acr";
 
 // Roll the chosen skill for the target
-await targetActor.rollSkill(targetSkill);
+let targetRoll = await targetActor.rollSkill(targetSkill);
+let targetRollTotal = targetRoll.fields[1][1].formula.total
 
-// Get the last chat message for the target's roll
-let targetMessage = game.messages.contents[game.messages.contents.length - 1];
-let targetRoll = targetMessage.data.flags.betterrolls5e.entries[1].entries[0].total;
 
 // Compare the rolls and apply the condition if the attacker wins
-if (attackerRoll > targetRoll) {
+if (attackerRollTotal > targetRollTotal) {
     let effectData = {
         label: condition.charAt(0).toUpperCase() + condition.slice(1),
         icon: condition === "prone" ? "icons/svg/falling.svg" : "icons/svg/net.svg",
